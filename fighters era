@@ -1,0 +1,601 @@
+local SolarisLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Stebulous/solaris-ui-lib/main/source.lua"))()
+
+
+
+
+
+
+
+
+repeat
+    task.wait()
+until game:IsLoaded()
+
+
+
+
+
+
+
+local Disables = {
+    game:GetService("Players").LocalPlayer.Idled,
+    game:GetService("ScriptContext").Error,
+    game:GetService("LogService").MessageOut
+}
+
+local Nos = {
+    "PreloadAsync",
+    "Kick",
+    "kick",
+    "xpcall",
+    "gcinfo",
+    "collectgarbage",
+}
+
+local Yes = {
+    game:GetService("Players").LocalPlayer,
+    game:GetService("CoreGui"),
+}
+
+for i, v in pairs(Disables) do
+    for i, v in pairs(getconnections(v)) do
+        v:Disable()
+    end
+end
+
+local OldNameCall = nil
+OldNameCall =
+    hookmetamethod(
+        game,
+        "__namecall",
+        newcclosure(
+            function(self, ...)
+                local A = {...}
+
+                if table.find(Nos, getnamecallmethod()) and table.find(Yes, self) then
+                    return nil or wait(math.huge)
+                end
+                if self.Name == 'yes' then
+                    return nil or wait(math.huge)
+                end
+                if typeof(A) ~= "Instance" then
+                    return OldNameCall(self, ...)
+                end
+                return OldNameCall(unpack(A), self, ...)
+            end
+        )
+    )
+
+local OldNameCall = nil
+OldNameCall =
+    hookfunction(
+        game:GetService("Players").LocalPlayer.Kick,
+        newcclosure(
+            function(self, ...)
+                local A = {...}
+                if self == game:GetService("Players").LocalPlayer then
+                    return nil or wait(math.huge)
+                end
+                if typeof(A) ~= "Instance" then
+                    return OldNameCall(self, ...)
+                end
+
+                return OldNameCall(unpack(A), self, ...)
+            end
+        )
+    )
+
+if setfflag then
+    setfflag("HumanoidParallelRemoveNoPhysics", "False")
+    setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+end
+if setfpscap then
+    setfpscap(100)
+end
+
+game:GetService("ScriptContext"):SetTimeout(0.5)
+--[[SolarisLib:New({
+  Name - Title of the UI <string>
+  FolderToSave - Name of the folder where the UI files will be stored <string>
+})]]
+local win = SolarisLib:New({
+    Name = "Fighter's Era",
+    FolderToSave = "Fighter's Era"
+})
+
+--win:Tab(title <string>)
+local tab = win:Tab("Teleport")
+
+--tab:Section(title <string>)
+local sec = tab:Section("Teleport")
+
+
+--sec:Button(title <string>, callback <function>)
+sec:Button("Gym", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7917.9560546875, 38.251731872558594, -884.5272827148438)
+end)
+
+
+
+--tab:Section(title <string>)
+local sec2 = tab:Section("Quest Boards")
+
+
+--sec:Button(title <string>, callback <function>)
+sec2:Button("Quest Board 1", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7827.66064453125, 38.05522155761719, -920.72265625)
+end)
+
+--sec:Button(title <string>, callback <function>)
+sec2:Button("Quest Board 2", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7969.6630859375, 38.14628601074219, -574.5513305664062)
+end)
+
+--sec:Button(title <string>, callback <function>)
+sec2:Button("Quest Board 3", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8294.1298828125, 38.144195556640625, -936.1986694335938)
+end)
+
+--sec:Button(title <string>, callback <function>)
+sec2:Button("Quest Board 4", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8227.595703125, 38.18891143798828, -1117.5557861328125)
+end)
+
+--sec:Button(title <string>, callback <function>)
+sec2:Button("Quest Board 5", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8157.77734375, 38.200225830078125, -1027.5904541015625)
+end)
+
+local sec3 = tab:Section("Quests")
+
+--sec:Button(title <string>, callback <function>)
+sec3:Button("Deliver Groceries", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7987.19287109375, 38.21915817260742, -903.1818237304688)
+    wait (0.5)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8263.779296875, 38.415504455566406, -946.6343383789062)
+end)
+
+--sec:Button(title <string>, callback <function>)
+sec3:Button("Pizza Party", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7702.81396484375, 38.19204330444336, -891.6956787109375)
+end)
+
+local tab2 = win:Tab("Purchases")
+
+--tab:Section(title <string>)
+local sec4 = tab2:Section("Purchase")
+
+--sec:Button(title <string>, callback <function>)
+sec4:Button("Stats Check up $650", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7575.73046875, 38.21950149536133, -1210.8621826171875)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").yeslol["Stat Check-up $650"].ClickDetector)
+    loadpos()
+end)
+
+
+--sec:Button(title <string>, callback <function>)
+sec4:Button("Protein Bar $72", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7749.9228515625, 38.1751708984375, -1113.0391845703125)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").yeslol["Protein Bar $72"].ClickDetector)
+    loadpos()
+end)
+
+--sec:Button(title <string>, callback <function>)
+sec4:Button("Hair Color Reroll ($3000)", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8105.13134765625, 38.353145599365234, -614.3461303710938)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").yeslol["Hair Reroll ($3000)"].ClickDetector)
+    loadpos()
+end)
+
+--sec:Button(title <string>, callback <function>)
+sec4:Button("Eye Reroll ($2000)", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8105.13134765625, 38.353145599365234, -614.3461303710938)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").yeslol["Eye Reroll ($2000)"].ClickDetector)
+    loadpos()
+end)
+
+--sec:Button(title <string>, callback <function>)
+sec4:Button("Money Buff Cake ($500)", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8205.2275390625, 38.47528076171875, -1142.512451171875)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").yeslol["Noobers Birthday Cake $500"].ClickDetector)
+    loadpos()
+end)
+
+
+--sec:Button(title <string>, callback <function>)
+sec4:Button("Pushup ($300)", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7934.61865234375, 38.21550750732422, -441.1766662597656)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").yeslol.mmm["Pushup $300"].ClickDetector)
+    loadpos()
+end)
+
+--sec:Button(title <string>, callback <function>)
+sec4:Button("Situps ($250)", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7932.07958984375, 38.21550369262695, -442.4967346191406)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").yeslol.mmm["Situps $250"].ClickDetector)
+    loadpos()
+
+end)
+
+--sec:Button(title <string>, callback <function>)
+sec4:Button("Vitamins ($150)", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7575.73046875, 38.21950149536133, -1210.8621826171875)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").yeslol["Vitamins $150"].ClickDetector)
+    loadpos()
+end)
+
+--sec:Button(title <string>, callback <function>)
+sec4:Button("Coffe ($40)", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8259.9541, 38.8755112, -967.64502, 0, -1, -0, -1, 0, -0, 0, 0, -1)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").yeslol["Coffee $40"].ClickDetector)
+    loadpos()
+end)
+
+
+--sec:Button(title <string>, callback <function>)
+sec4:Button("Clan Reroll ($25000)", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7267.58838, -10.9593363, -36.8494873, -0.151110649, 0.0141377188, -0.988415778, 0.00210313126, 0.999900043, 0.0139804529, 0.988514602, 3.38274986e-05, -0.151125312)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").Npcs["???"].ClickDetector)
+    wait (0.1)
+    -- Script generated by SimpleSpy - credits to exx#9394
+
+    local args = {
+        [1] = "???",
+        [2] = "Sure, But its gonna cost $25000",
+        [3] = "Okay"
+    }
+
+    game:GetService("ReplicatedStorage").Remotes.okoll:InvokeServer(unpack(args))
+
+    loadpos()
+
+end)
+
+
+
+
+
+--sec:Button(title <string>, callback <function>)
+sec4:Button("Shadow Training ($200)", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7882.95068359375, 53.98990249633789, -832.30078125)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").yeslol.mmm["Shadow Training $200"].ClickDetector)
+    loadpos()
+
+end)
+
+
+
+--sec:Button(title <string>, callback <function>)
+sec4:Button("Self-Punch ($250)", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7909.11376953125, 38.31550598144531, -431.8376159667969)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").yeslol.mmm["Self Punch $250"].ClickDetector)
+    loadpos()
+
+end)
+
+--sec:Button(title <string>, callback <function>)
+sec4:Button("Durabillity Training ($200)", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7878.19141, 51.1142044, -833.414001, 0, -1, -0, -1, 0, -0, 0, 0, -1)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").yeslol.mmm["Durability Training $200"].ClickDetector)
+    loadpos()
+
+end)
+
+
+
+
+
+
+
+
+
+
+
+local sec7 = tab2:Section("Vests")
+
+--sec:Button(title <string>, callback <function>)
+sec7:Button("20kg ($750", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7924.52734, 35.3399124, -437.27359, 0, -1, -0, -1, 0, -0, 0, 0, -1)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").yeslol.mmm["20kg Vest $750"].ClickDetector)
+    loadpos()
+
+end)
+
+
+--sec:Button(title <string>, callback <function>)
+sec7:Button("40kg ($1500)", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7920.47656, 35.3399124, -437.27359, 0, -1, -0, -1, 0, -0, 0, 0, -1)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").yeslol.mmm["40kg Vest $1500"].ClickDetector)
+    loadpos()
+
+end)
+
+
+--sec:Button(title <string>, callback <function>)
+sec7:Button("80kg (2000)", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7916.37646, 35.3399124, -437.323608, 0, -1, -0, -1, 0, -0, 0, 0, -1)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").yeslol.mmm["80kg Vest $2000"].ClickDetector)
+    loadpos()
+
+end)
+
+
+--sec:Button(title <string>, callback <function>)
+sec7:Button("120kg ($2500)", function()
+    local savedpos = ""
+
+    local function savepos()
+        savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+
+    local function loadpos()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  savedpos
+    end
+
+    savepos()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7912.17725, 35.3399124, -437.423584, 0, -1, -0, -1, 0, -0, 0, 0, -1)
+    wait(0.3)
+    fireclickdetector(game:GetService("Workspace").yeslol.mmm["120kg Vest $2500"].ClickDetector)
+    loadpos()
+
+end)
+
+
+
+
+
+--win:Tab(title <string>)
+local tab3 = win:Tab("Misc")
+
+
+local sec6 = tab3:Section("Misc")
+
+
+
+--tab:Section(title <string>)
+local sec5 = tab3:Section("OP")
+
+getgenv().infmoney = false
+local toggle = sec6:Toggle("infmoney", false,"Toggle", function(t)
+    getgenv().infmoney = t
+end)
+
+task.spawn(function()
+    while true do
+        wait()
+        if getgenv().infmoney == true then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Npcs["Robby Kure"].HumanoidRootPart.CFrame
+            local args = {
+                [1] = "Robby Kure",
+                [2] = "I have a letter that I need to get to Tan, But Im so slow that I will be late.",
+                [3] = "Alright"
+            }
+            game:GetService("ReplicatedStorage").Remotes.okoll:InvokeServer(unpack(args))
+            wait(0.3)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Npcs["Tan Sen"].HumanoidRootPart.CFrame
+            wait(0.3)
+            fireclickdetector(game:GetService("Workspace").Npcs["Tan Sen"].ClickDetector)
+        end
+    end
+end)
+
+
+getgenv().auto_punch = false
+local toggle2 = sec6:Toggle("Auto Shadow Training", false,"Toggle", function(t)
+    getgenv().auto_punch = t
+end)
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+
+task.spawn(function()
+    while true do
+        task.wait()
+        if getgenv().auto_punch then
+            for _, value in pairs(game:GetService("Workspace").Live:GetChildren()) do
+                if value.Name == "Shadow" and value:FindFirstChild("HumanoidRootPart") then
+                    LocalPlayer.Character.HumanoidRootPart.CFrame = value.HumanoidRootPart.CFrame + value.HumanoidRootPart.CFrame.lookVector * -2
+                    if LocalPlayer.Backpack:FindFirstChild("Basic Combat") then
+                        LocalPlayer.Character.Humanoid:EquipTool(LocalPlayer.Backpack["Basic Combat"])
+                    end
+                    mouse1press()
+                    wait()
+                    mouse1release()
+                end
+            end
+        end
+    end
+end)
